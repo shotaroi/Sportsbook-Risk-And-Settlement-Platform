@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: sportsbook-postgres
+    environment:
+      POSTGRES_DB: sportsbook
+      POSTGRES_USER: sportsbook
+      POSTGRES_PASSWORD: sportsbook
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sportsbook -d sportsbook"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
