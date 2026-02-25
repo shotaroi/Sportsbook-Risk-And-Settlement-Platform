@@ -1,0 +1,64 @@
+spring:
+  application:
+    name: sportsbook-risk-settlement
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sportsbook
+    username: sportsbook
+    password: sportsbook
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+
+  jpa:
+    hibernate:
+      ddl-auto: validate  # Flyway manages schema; Hibernate validates only
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 32
+        jdbc:
+          batch_size: 20
+    open-in-view: false
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+server:
+  port: 8080
+
+# JWT config (for public API)
+jwt:
+  secret: ${JWT_SECRET:your-256-bit-secret-key-for-jwt-signing-must-be-at-least-32-chars}
+  expiration-ms: 86400000  # 24 hours
+
+# Admin Basic Auth (for /admin/**). Use {noop}plain for dev, bcrypt hash for prod.
+admin:
+  username: ${ADMIN_USERNAME:admin}
+  password: ${ADMIN_PASSWORD:{noop}admin-secret}
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when-authorized
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+# OpenAPI
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
