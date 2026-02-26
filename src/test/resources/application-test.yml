@@ -1,0 +1,16 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+
+  flyway:
+    enabled: true
+
+jwt:
+  secret: test-secret-key-for-jwt-signing-must-be-at-least-32-chars
+  expiration-ms: 3600000
+
+admin:
+  username: admin
+  password: admin-secret
