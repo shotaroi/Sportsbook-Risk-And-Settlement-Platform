@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.myname.sportsbook.settlement.SettlementIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 1.303 s -- in com.myname.sportsbook.settlement.SettlementIntegrationTest
